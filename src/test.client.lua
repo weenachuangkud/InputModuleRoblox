@@ -22,4 +22,5 @@ InputConfigs.PressR.OnInputEnded = function()
 end
 
 -- recommended
-InputService.Bind(
+InputService.Bind("ONCLICK", InputConfigs.Click)
+InputService.Bind("ONPRESSR", InputConfigs.PressR)
