@@ -1,6 +1,7 @@
 ----// Date : 2025
 
 -- Requires
-local InputService = PathtoModule:WaitForChild("InputService")
+local InputService = require(PathtoModule:WaitForChild("InputService"))
+local InputConfigs = require(PathToModule:WaitForChild("InputConfigs"))
 
 -- Test
