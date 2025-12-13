@@ -37,7 +37,7 @@ function InputService.Bind(
 	name: string,
 	cfg: InputConfigs.InputConfig
 )
-	if not cfg then warn("InputConfig is nil") return end
+	if not cfg then error("InputConfig is nil") return end
 	-- Mobile GUI button (optional)
 	if cfg.MobileButton and InputConfigs.IsMobile then
 		local button : ImageButton | TextButton = cfg.MobileButton
