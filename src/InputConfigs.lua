@@ -12,6 +12,7 @@ export type InputConfig = {
 	OnInputBegan : ((InputObject) -> ())?,
 	OnInputEnded : ((InputObject) -> ())?,
 	MobileButton : (TextButton | ImageButton)?
+	Sink : boolean?,
 }
 
 export type InputConfigs = {
