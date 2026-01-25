@@ -24,8 +24,8 @@ local Buttons : {[string] : ImageButton | TextButton} = {}
 
 -- Export Types
 export type InputService = {
-	Bind : (actionName : string, cfg : InputTypes.InputConfig) -> (),
-	UnBind : (actionName : string) -> (),
+	Bind : (actionName : string, cfg : InputTypes.InputConfig, IsMobile: boolean?) -> (),
+	UnBind : (actionName : string, IsMobile: boolean?) -> (),
 	UnBindByName : (actionName : string) -> (),
 	UnBindAll : () -> ()
 }
@@ -37,11 +37,12 @@ local InputService = {}
 -- Bind a single named action
 function InputService.Bind(
 	name: string,
-	cfg: InputTypes.InputConfig
+	cfg: InputTypes.InputConfig,
+	IsMobile: boolean?
 )
 	assert(cfg, "InputConfig is nil")
 	-- Mobile GUI button (optional)
-	if cfg.MobileButton and cfg.IsMobile then
+	if IsMobile and cfg.MobileButton then
 		local button : ImageButton | TextButton = cfg.MobileButton
 		if not button then warn("No MobileButton for : ", name) return end
 		if Actives[name] then warn("Already Bind this actionName") return end
