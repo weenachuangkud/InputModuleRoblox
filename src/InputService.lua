@@ -25,7 +25,6 @@ local Buttons : {[string] : ImageButton | TextButton} = {}
 export type InputService = {
 	Bind : (actionName : string, cfg : InputConfigs.InputConfig) -> (),
 	UnBind : (actionName : string) -> (),
-	AutoDetectAndBind : () -> (),
 	UnBindAll : () -> ()
 }
 
