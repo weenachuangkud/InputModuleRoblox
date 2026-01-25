@@ -26,8 +26,7 @@ local Buttons : {[string] : ImageButton | TextButton} = {}
 export type InputService = {
 	Bind : (actionName : string, cfg : InputTypes.InputConfig, IsMobile: boolean?) -> (),
 	UnBind : (actionName : string, IsMobile: boolean?) -> (),
-	UnBindByName : (actionName : string) -> (),
-	UnBindAll : () -> ()
+	UnBindAll : (IsMobile: boolean?) -> ()
 }
 
 -- Module
@@ -119,9 +118,12 @@ function InputService.IsBinded(Name : string, IsMobile: boolean?) : boolean
 end
 
 
-function InputService.UnBindAll()
-	for keyName, active in Buttons do
-		InputService.UnBind(keyName)
+function InputService.UnBindAll(IsMobile: boolean?)
+	if IsMobile then
+		for keyName, active in Buttons do
+			InputService.UnBind(keyName)
+		end
+		return
 	end
 	CAS:UnbindAllActions()
 end
