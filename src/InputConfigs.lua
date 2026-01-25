@@ -20,15 +20,4 @@ export type InputConfigs = {
 	[string] : InputConfig
 }
 
--- NOTE : You can also create InputConfigs separately
-local InputConfigs : InputConfigs = {
-	IsMobile = false,
-  ["Click"] = {
-		Trigger = Enum.UserInputType.MouseButton1
-	},
-  ["PressR"] = {
-		Trigger = Enum.KeyCode.R
-	}
-}
-
-return InputConfigs
+return {}
