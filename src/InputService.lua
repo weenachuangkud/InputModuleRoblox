@@ -20,8 +20,6 @@ local Actives : {[string] : {
 	["OnInputEnded"] : RBXScriptConnection?	
 }} = {}
 
-local Buttons : {[string] : ImageButton | TextButton} = {}
-
 -- Export Types
 export type InputService = {
 	Bind : (actionName : string, cfg : InputTypes.InputConfig, IsMobile: boolean?) -> (),
@@ -49,9 +47,9 @@ function InputService.Bind(
 			OnInputBegan = cfg.OnInputBegan and button.InputBegan:Connect(cfg.OnInputBegan),
 			OnInputEnded = cfg.OnInputEnded and button.InputEnded:Connect(cfg.OnInputEnded)
 		}
-		if not Buttons[name] then Buttons[name] = button end
-		if not button.Visible then button.Visible = true end
 		return
+	else
+		
 	end
 
 	-- Desktop / Keyboard / Gamepad binding
@@ -81,7 +79,7 @@ function InputService.Bind(
 	CAS:BindAction(name, handleAction, false, triggers)
 end
 
-function InputService.UnBind(Name : string, IsMobile : boolean)
+function InputService.UnBind(Name : string, IsMobile : boolean?)
 	if IsMobile then
 		if Actives[Name] then
 			-- My eyes are bleeding seeing these warnings
@@ -92,10 +90,6 @@ function InputService.UnBind(Name : string, IsMobile : boolean)
 			if Actives[Name].OnInputEnded then
 				Actives[Name].OnInputEnded:Disconnect()
 				Actives[Name].OnInputEnded = nil
-			end
-			local button = Buttons[Name]
-			if button then 
-				Buttons[Name] = nil
 			end
 		else
 			warn(Name .. " Does not exist")
@@ -110,20 +104,16 @@ function InputService.UnBind(Name : string, IsMobile : boolean)
 	end
 end
 
-function InputService.IsBinded(Name : string, IsMobile: boolean?) : boolean
-	if IsMobile then
-		return Buttons[Name] ~= nil
-	end
+function InputService.IsBinded(Name : string)
 	return Actives[Name] ~= nil
 end
 
 
 function InputService.UnBindAll(IsMobile: boolean?)
 	if IsMobile then
-		for keyName, active in Buttons do
+		for keyName, active in Actives do
 			InputService.UnBind(keyName)
 		end
-		return
 	end
 	CAS:UnbindAllActions()
 end
