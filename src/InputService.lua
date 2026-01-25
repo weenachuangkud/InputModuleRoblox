@@ -107,6 +107,13 @@ function InputService.UnBind(Name : string)
 	end
 end
 
+function InputService.IsBinded(Name : string, IsMobile: boolean?) : boolean
+	if IsMobile then
+		return Buttons[Name] ~= nil
+	end
+	return Actives[Name] ~= nil
+end
+
 function InputService.UnBindAll()
 	if InputConfigs.IsMobile then
 		for keyName, active in pairs(Actives) do
