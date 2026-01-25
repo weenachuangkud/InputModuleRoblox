@@ -48,8 +48,6 @@ function InputService.Bind(
 			OnInputEnded = cfg.OnInputEnded and button.InputEnded:Connect(cfg.OnInputEnded)
 		}
 		return
-	else
-		
 	end
 
 	-- Desktop / Keyboard / Gamepad binding
