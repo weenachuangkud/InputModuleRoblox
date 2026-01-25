@@ -4,7 +4,8 @@
 	Desc   : Binds InputConfigs to ContextActionService (desktop + mobile)
 ]]
 
---!strict
+-- Service
+local CAS = game:GetService("ContextActionService")
 
 -- Modules
 local InputMods = PathTo.Modules:WaitForChild("InputModules")
