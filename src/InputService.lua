@@ -70,7 +70,7 @@ function InputService.Bind(
 			end
 		end
 
-		return Enum.ContextActionResult.Sink
+		return cfg.Sink and Enum.ContextActionResult.Sink or Enum.ContextActionResult.Pass
 	end
 	
 	if typeof(triggers) == "table" then 
