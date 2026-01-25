@@ -93,7 +93,6 @@ function InputService.UnBind(Name : string)
 			end
 			local button = Buttons[Name]
 			if button then 
-				if button.Visible then button.Visible = false end
 				Buttons[Name] = nil
 			end
 		else
