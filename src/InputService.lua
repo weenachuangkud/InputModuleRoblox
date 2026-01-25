@@ -73,7 +73,9 @@ function InputService.Bind(
 		return Enum.ContextActionResult.Sink
 	end
 	
-	if typeof(triggers) == "table" then triggers = table.unpack(triggers) end
+	if typeof(triggers) == "table" then 
+		triggers = table.unpack(triggers)
+	end
 	CAS:BindAction(name, handleAction, false, triggers)
 end
 
