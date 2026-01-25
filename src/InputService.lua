@@ -4,14 +4,15 @@
 	Desc   : Binds InputConfigs to ContextActionService (desktop + mobile)
 ]]
 
--- Services
+-- Service
 local CAS = game:GetService("ContextActionService")
 
 -- Modules
-local InputMods = PathTo.Modules:WaitForChild("InputModules")
+local InputMods = PathTo:WaitForChild("InputModules")
 
 -- Requires
-local InputConfigs = require(InputMods:WaitForChild("InputConfigs"))
+local InputTypes = require(InputMods:WaitForChild("InputTypes"))
+
 
 -- Connections
 local Actives : {[string] : {
@@ -23,8 +24,9 @@ local Buttons : {[string] : ImageButton | TextButton} = {}
 
 -- Export Types
 export type InputService = {
-	Bind : (actionName : string, cfg : InputConfigs.InputConfig) -> (),
+	Bind : (actionName : string, cfg : InputTypes.InputConfig) -> (),
 	UnBind : (actionName : string) -> (),
+	UnBindByName : (actionName : string) -> (),
 	UnBindAll : () -> ()
 }
 
@@ -35,11 +37,11 @@ local InputService = {}
 -- Bind a single named action
 function InputService.Bind(
 	name: string,
-	cfg: InputConfigs.InputConfig
+	cfg: InputTypes.InputConfig
 )
 	assert(cfg, "InputConfig is nil")
 	-- Mobile GUI button (optional)
-	if cfg.MobileButton and InputConfigs.IsMobile then
+	if cfg.MobileButton and cfg.IsMobile then
 		local button : ImageButton | TextButton = cfg.MobileButton
 		if not button then warn("No MobileButton for : ", name) return end
 		if Actives[name] then warn("Already Bind this actionName") return end
@@ -72,15 +74,15 @@ function InputService.Bind(
 
 		return cfg.Sink and Enum.ContextActionResult.Sink or Enum.ContextActionResult.Pass
 	end
-	
+
 	if typeof(triggers) == "table" then 
 		triggers = table.unpack(triggers)
 	end
 	CAS:BindAction(name, handleAction, false, triggers)
 end
 
-function InputService.UnBind(Name : string)
-	if InputConfigs.IsMobile then
+function InputService.UnBind(Name : string, IsMobile : boolean)
+	if IsMobile then
 		if Actives[Name] then
 			-- My eyes are bleeding seeing these warnings
 			if Actives[Name].OnInputBegan then
@@ -115,12 +117,10 @@ function InputService.IsBinded(Name : string, IsMobile: boolean?) : boolean
 	return Actives[Name] ~= nil
 end
 
+
 function InputService.UnBindAll()
-	if InputConfigs.IsMobile then
-		for keyName, active in pairs(Actives) do
-			InputService.UnBind(keyName)
-		end
-		return
+	for keyName, active in Buttons do
+		InputService.UnBind(keyName)
 	end
 	CAS:UnbindAllActions()
 end
