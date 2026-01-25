@@ -4,7 +4,7 @@
 	Desc   : Binds InputConfigs to ContextActionService (desktop + mobile)
 ]]
 
--- Service
+-- Services
 local CAS = game:GetService("ContextActionService")
 
 -- Modules
@@ -105,18 +105,6 @@ function InputService.UnBind(Name : string)
 		CAS:UnbindAction(Name)
 	else
 		warn(Name .. " Does not exist")
-	end
-end
-
--- Optional: auto-detect mobile & re-bind everything, YOU'RE FUCKING LAZY
-function InputService.AutoDetectAndBind()
-	local isMobile = UIS.TouchEnabled and not UIS.KeyboardEnabled
-	InputConfigs.IsMobile = isMobile
-
-	for actionName, cfg in pairs(InputConfigs) do
-		if typeof(cfg) == "table" and cfg.Trigger then
-			InputService.Bind(actionName, cfg)
-		end
 	end
 end
 
