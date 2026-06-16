@@ -1,0 +1,23 @@
+# Roblox File Extensions
+/*.rbxm
+/*.rbxmx
+/*.rbxl
+/*.rbxlx
+
+# Rojo stuff
+sourcemap.json
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
+
+# Moonwave related stuff
+/node_modules
+/package-lock.json
+
+# Agents related stuff
+.omo
+
+# Development related stuff
+DevPackages
+build
