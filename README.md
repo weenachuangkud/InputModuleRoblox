@@ -10,7 +10,7 @@ A lightweight `ContextActionService` wrapper for Roblox that unifies desktop key
 
 ## Installation
 
-1. Place `InputService.luau` and `InputTypes.luau` in a shared module folder (e.g. `ReplicatedStorage/Input`)
+1. Place `InputService.luau` in a shared module folder (e.g. `ReplicatedStorage/Input`)
 2. In any `Script` or `LocalScript`:
 
 ```lua
@@ -43,7 +43,7 @@ Returns `true` if the action is currently bound (checks both custom button and C
 
 ## InputConfig
 
-Defined in `InputTypes.luau`:
+Defined at the top of `InputService.luau`:
 
 ```lua
 type InputConfig = {
