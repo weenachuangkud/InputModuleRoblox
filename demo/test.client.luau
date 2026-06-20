@@ -1,7 +1,7 @@
 ----// Date : 2025
 
 -- Step 1: requires
-local InputService = require(script.Parent:WaitForChild("InputService"))
+local InputService = require(script.Parent:WaitForChild("InputModule"))
 
 -- Step 2: define configs
 local Click = {
